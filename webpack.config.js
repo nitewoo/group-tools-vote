@@ -1,20 +1,21 @@
 var path = require('path');
 
-var relativeAssetsPath = './static/dist';
+var relativeAssetsPath = './static/assets';
 var assetsPath = path.join(__dirname, relativeAssetsPath);
 
 module.exports = {
     entry: './src/index.js',
+    // context: path.resolve(__dirname, '.'),
     output: {
         path: assetsPath,
         filename: 'bundle.js', //this is the default name, so you can skip it
         //at this directory our bundle file will be available
-        //make sure port 8090 is used when launching webpack-dev-server
-        // publicPath: 'http://localhost:8090/assets'
-        publicPath: '/dist/'
+        // publicPath: 'http://localhost:8081/assets'
+        publicPath: '/assets/'
     },
     devServer: {
         contentBase: "./src",
+        historyApiFallback: true
     },
     module: {
         loaders: [
