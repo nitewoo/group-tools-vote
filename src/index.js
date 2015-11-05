@@ -1,48 +1,39 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-// import App from './app'
-// import { increment } from './actionCreater'
-// import { createStore } from 'redux'
-// import counterReducer from './reducer'
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-
-
-// let store = createStore(counterReducer)
-
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <App />
-//   </Provider>,
-//   document.getElementById('content')
-// )
-
+import { createHistory } from 'history'
+import { Route, IndexRoute } from 'react-router'
 import {
   createStore,
   compose,
   combineReducers
-} from 'redux';
+} from 'redux'
 
 import {
   ReduxRouter,
   routerStateReducer,
   reduxReactRouter
-} from 'redux-router';
+} from 'redux-router'
 
-import { Route, IndexRoute } from 'react-router';
+// containers
+import {
+  App,
+  Home
+} from './containers/index'
 
-import { createHistory } from 'history';
-
-import App from './containers/App/App'
-import Home from './containers/Home/Home'
+// reducers
+import counter from './reducers/counter'
 
 const reducer = combineReducers({
-  router: routerStateReducer
+  router: routerStateReducer,
+  counter: counter
 })
 
 const store = compose(
   reduxReactRouter({ createHistory })
 )(createStore)(reducer)
 
+  // console.log(app)
 ReactDOM.render(
   <Provider store={store}>
     <ReduxRouter>

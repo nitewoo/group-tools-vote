@@ -1,7 +1,8 @@
 import React from 'react'
 
-class CountView extends React.Component {
+class CounterVal extends React.Component {
   render() {
+    console.log(this.props)
 
     return (
       <h1>it is: {this.props.count}</h1>
@@ -9,4 +10,4 @@ class CountView extends React.Component {
   }
 }
 
-export default CountView
+export default CounterVal
