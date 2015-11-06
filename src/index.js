@@ -18,7 +18,8 @@ import {
 // containers
 import {
   App,
-  Home
+  Home,
+  About
 } from './containers/index'
 
 // reducers
@@ -39,6 +40,7 @@ ReactDOM.render(
     <ReduxRouter>
       <Route path="/" component={App}>
         <Route path="home" component={Home}/>
+        <Route path="about" component={About}/>
       </Route>
     </ReduxRouter>
   </Provider>,

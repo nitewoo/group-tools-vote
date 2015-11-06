@@ -1,13 +1,13 @@
-var webpack = require('webpack')
-var WebpackDevServer = require('webpack-dev-server')
-var config = require('../webpack.config')
+import webpack from 'webpack'
+import WebpackDevServer from 'webpack-dev-server'
+import config from '../webpack.config'
 
-var express = require('express')
-var proxy = require('proxy-middleware')
-var url = require('url')
+import express from 'express'
+import proxy from 'proxy-middleware'
+import url from 'url'
 
 // -------- proxy ----------------------
-var app = express();
+const app = express();
 // proxy the request for static assets
 app.use('/assets', proxy(url.parse('http://localhost:8081/assets')));
 
@@ -16,7 +16,7 @@ app.get('/*', function(req, res) {
 });
 
 // ------ webpack-dev-server ------------------
-var server = new WebpackDevServer(webpack(config), {
+const server = new WebpackDevServer(webpack(config), {
     contentBase: __dirname,
     hot: true,
     quiet: false,
