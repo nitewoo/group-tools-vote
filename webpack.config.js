@@ -10,8 +10,8 @@ module.exports = {
         path: assetsPath,
         filename: 'bundle.js', //this is the default name, so you can skip it
         //at this directory our bundle file will be available
-        // publicPath: 'http://localhost:8081/assets'
-        publicPath: '/assets/'
+        publicPath: 'http://localhost:8081/assets'
+        // publicPath: '/assets/'
     },
     devServer: {
         contentBase: "./src",

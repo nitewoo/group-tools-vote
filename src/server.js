@@ -8,8 +8,46 @@ var url = require('url')
 
 // -------- proxy ----------------------
 var app = express();
+
 // proxy the request for static assets
 app.use('/assets', proxy(url.parse('http://localhost:8081/assets')));
+
+var session = require('express-session');
+app.use(session({
+  // genid: function(req) {
+  //   return genuuid() // use UUIDs for session IDs
+  // },
+  secret: 'uuapclient-35-W9krKLXBfeNTo31aUF1k'
+}));
+
+app.use('/', require('./casRoutes'));
+
+/**
+ sso处理
+ */
+var cas = require('cas');
+
+
+app.all('*', function (req, res, next) {
+  if (req.method == 'POST' && req.body['logoutRequest']) {
+      var parser = new xml2js.Parser();
+      parser.parseString(req.body['logoutRequest'], function (err, result) {
+        if (!err) {
+            console.log(req.body['logoutRequest'])  ;
+            var ticket = result['samlp:LogoutRequest']['samlp:SessionIndex'][0];
+            // console.log('ticket:'+ticket)  ;
+            console.log('logining out:', ticket);
+          }
+        return next();
+      });
+    }
+    else {
+      // This was not a signout request. Proceed normally.
+      return next();
+    }
+});
+
+
 
 app.get('/*', function(req, res) {
     res.sendFile(__dirname + '/index.html');
@@ -28,4 +66,4 @@ var server = new WebpackDevServer(webpack(config), {
 
 // run the two servers
 server.listen(8081, "localhost", function() {});
-app.listen(8080);
+app.listen(9000);
