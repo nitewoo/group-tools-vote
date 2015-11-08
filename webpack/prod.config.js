@@ -5,7 +5,7 @@ var relativeAssetsPath = '../static/assets';
 var assetsPath = path.join(__dirname, relativeAssetsPath);
 
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
-var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'));
+var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./isomorphic-tools.config'));
 
 var host = 'localhost';
 var port = 6060;
