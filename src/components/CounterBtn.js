@@ -5,7 +5,7 @@ class CounterBtn extends React.Component {
     const { increment } = this.props
     return (
       <div>
-        <button onClick={increment}>+</button>
+        <button type="button" className="btn btn-primary" onClick={increment}>Plus</button>
       </div>
     )
   }

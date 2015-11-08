@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 // import {bindActionCreators} from 'redux';
 
 // components
@@ -9,32 +9,45 @@ import CounterVal from '../../components/CounterVal'
 // action creator
 import { increment } from '../../reducers/counter'
 
+
 class Home extends Component {
 
   render() {
-    const { dispatch, counter } = this.props;
-      console.log(this.props)
-    function doIncrement () {
-      dispatch({type: 'INCREMENT_COUNTER'});
-    }
-    // console.log(dispatch);
+    const sc = this.style.locals
+    const joker = require('./joker.jpg');
 
-    console.log(this.props)
+    const {
+      dispatch,
+      counter
+    } = this.props
+
+    function doIncrement () {
+      dispatch({type: 'INCREMENT_COUNTER'})
+    }
 
     return (
       <div>
-        <h1>it is home</h1>
+        <h1 className={sc.title}>it is home</h1>
         <CounterBtn increment={doIncrement} />
         <CounterVal count={this.props.count} />
+        <img src={joker}/>
       </div>
     )
   }
+
+  componentWillMount() {
+    // load module style
+    this.style = require('./style.scss').ref()
+  }
+
+  componentWillUnmount() {
+    // unload module style
+    this.style.unref()
+  }
 }
 
-// export default Home
-
 function mapStateToProps(state) {
-  console.log(state);
+  // console.log(state);
   return {
     count: state.counter.count
   }

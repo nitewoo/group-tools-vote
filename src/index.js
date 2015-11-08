@@ -39,7 +39,7 @@ ReactDOM.render(
   <Provider store={store}>
     <ReduxRouter>
       <Route path="/" component={App}>
-        <Route path="home" component={Home}/>
+        <IndexRoute component={Home}/>
         <Route path="about" component={About}/>
       </Route>
     </ReduxRouter>

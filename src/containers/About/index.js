@@ -11,21 +11,31 @@ import { connect } from 'react-redux';
 
 class About extends Component {
 
+  // const self = this;
+  // self.style = require('./style.scss');
   render() {
-    const { dispatch } = this.props;
-      console.log(this.props)
-    // console.log(dispatch);
+    const sc = this.style.locals;
 
-    console.log(this.props)
+    const { dispatch } = this.props
 
     return (
       <div>
-        <h1>hello, react</h1>
+        <h1 className={sc.title}>hello, react</h1>
       </div>
     )
   }
-}
 
+  componentWillMount() {
+    // load module style
+    this.style = require('./style.scss').ref()
+  }
+
+  componentWillUnmount() {
+    // unload module style
+    this.style.unref()
+  }
+}
+About.style = require('./style.scss');
 // export default Home
 
 function mapStateToProps(state) {

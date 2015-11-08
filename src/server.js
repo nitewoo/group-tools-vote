@@ -9,7 +9,7 @@ import url from 'url'
 // -------- proxy ----------------------
 const app = express();
 // proxy the request for static assets
-app.use('/assets', proxy(url.parse('http://localhost:8081/assets')));
+app.use('/assets', proxy(url.parse('http://localhost:7071/assets')));
 
 app.get('/*', function(req, res) {
     res.sendFile(__dirname + '/index.html');
@@ -27,5 +27,5 @@ const server = new WebpackDevServer(webpack(config), {
 });
 
 // run the two servers
-server.listen(8081, "localhost", function() {});
-app.listen(8080);
+server.listen(7071, "localhost", function() {});
+app.listen(7070);

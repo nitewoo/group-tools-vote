@@ -33,11 +33,12 @@ injectTapEventPlugin()
 
 class App extends Component {
   render() {
+    const sc = this.style.locals;
     const { dispatch } = this.props;
 
     const menuItems = [
-      { route: 'home', text: 'go home' },
-      { route: 'about', text: 'go about' }
+      { route: '/', text: 'home' },
+      { route: '/about', text: 'about' }
     ];
 
     const _toggleLeftNav = () => {
@@ -49,12 +50,13 @@ class App extends Component {
       // this.props.history.pushState(null, payload.route);
     }
 
+    let childrenElement = this.props.children;
     // to transfer props to children
-    // use {childrenElement} replace {this.props.children}
-    // let childrenElement = React.cloneElement(this.props.children, {incre: this.props.incre});
+    // childrenElement = React.cloneElement(this.props.children, { someProp: this.someProp });
+
     return (
       <div>
-        <LeftNav ref="leftNav" docked={false} menuItems={menuItems} onChange={_onLeftNavChange}/>
+        <LeftNav ref="leftNav" docked={false} menuItems={menuItems} onChange={_onLeftNavChange} />
         <AppBar
           title="Vote"
           iconElementLeft={
@@ -73,9 +75,20 @@ class App extends Component {
               <MenuItem primaryText="Sign out" />
             </IconMenu>
         } />
-        {this.props.children}
+        <div className={sc.brand}></div>
+        {childrenElement}
       </div>
     )
+  }
+
+  componentWillMount() {
+    // load moule style
+    this.style = require('./style.scss').ref()
+  }
+
+  componentWillUnmount() {
+    // unload moule style
+    this.style.unref();
   }
 }
 
