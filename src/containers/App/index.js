@@ -10,9 +10,6 @@ import {
   LeftNav,
   IconButton,
   IconMenu,
-  FlatButton,
-  Avatar,
-  FontIcon
 } from 'material-ui'
 import {
   NavigationMenu,
@@ -38,7 +35,6 @@ class App extends Component {
 
     const menuItems = [
       { route: '/', text: 'home' },
-      { route: '/about', text: 'about' }
     ];
 
     const _toggleLeftNav = () => {
@@ -75,7 +71,6 @@ class App extends Component {
               <MenuItem primaryText="Sign out" />
             </IconMenu>
         } />
-        <div className={sc.brand}></div>
         {childrenElement}
       </div>
     )

@@ -12,7 +12,12 @@ var port = 6060;
 
 module.exports = {
   context: path.resolve(__dirname, '..'),
-  entry: './src/index.js',
+  entry: {
+    main: [
+      'bootstrap-sass!./src/theme/bootstrap.config.js',
+      './src/index.js'
+    ]
+  },
   output: {
     path: assetsPath,
     filename: 'bundle.js', //this is the default name, so you can skip it
@@ -42,6 +47,18 @@ module.exports = {
     }, {
       test: webpackIsomorphicToolsPlugin.regular_expression('images'),
       loader: 'url-loader?limit=10240'
+    }, {
+      test: /\.json$/, loader: 'json-loader'
+    }, {
+      test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff"
+    }, {
+      test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff"
+    }, {
+      test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream"
+    }, {
+      test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file"
+    }, {
+      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml"
     }]
   },
   progress: true,

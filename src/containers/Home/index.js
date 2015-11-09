@@ -14,7 +14,6 @@ class Home extends Component {
 
   render() {
     const sc = this.style.locals
-    const joker = require('./joker.jpg');
 
     const {
       dispatch,
@@ -30,7 +29,6 @@ class Home extends Component {
         <h1 className={sc.title}>it is home</h1>
         <CounterBtn increment={doIncrement} />
         <CounterVal count={this.props.count} />
-        <img src={joker}/>
       </div>
     )
   }
