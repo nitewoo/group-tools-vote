@@ -51,7 +51,7 @@ class App extends Component {
     // childrenElement = React.cloneElement(this.props.children, { someProp: this.someProp });
 
     return (
-      <div>
+      <div className="container">
         <LeftNav ref="leftNav" docked={false} menuItems={menuItems} onChange={_onLeftNavChange} />
         <AppBar
           title="Vote"
