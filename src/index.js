@@ -12,7 +12,8 @@ import DiffMonitor from 'redux-devtools-diff-monitor'
 import {
   createStore,
   compose,
-  combineReducers
+  combineReducers,
+  applyMiddleware
 } from 'redux'
 
 import {
@@ -21,6 +22,8 @@ import {
   reduxReactRouter
 } from 'redux-router'
 
+import thunk from 'redux-thunk'
+
 // containers
 import {
   App,
@@ -28,19 +31,21 @@ import {
 } from './containers/index'
 
 // reducers
-import counter from './reducers/counter'
+import topics from './reducers/topics'
 
 const reducer = combineReducers({
   router: routerStateReducer,
-  counter: counter
+  topics: topics
 })
 
+const middleware = [thunk]
+
 const store = compose(
+  applyMiddleware(...middleware),
   reduxReactRouter({ createHistory }),
   devTools()
 )(createStore)(reducer)
 
-  // console.log(app)
 ReactDOM.render(
   <div>
     <Provider store={store}>

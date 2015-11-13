@@ -6,40 +6,29 @@ import { connect } from 'react-redux'
 // components
 import {
   TextField,
-  FlatButton
+  RaisedButton
 } from 'material-ui'
 
 import TopicList from '../../components/TopicList/List'
 
 // action creator
-import { increment } from '../../reducers/counter'
+import { searchTopic, fetchTopicsIfNeeded } from '../../reducers/topics'
 
 
 class Home extends Component {
+  constructor(props) {
+    super(props)
+    this.handleRefreshClick = this.handleRefreshClick.bind(this)
+  }
 
   render() {
     const sc = this.style.locals
 
     const {
       dispatch,
-      counter
+      items,
+      isFetching
     } = this.props
-
-    const topicList = [{
-      id: '123',
-      title: 'topic 1',
-      date: '2015-11-11',
-      description: 'blah blah balh topic 1111'
-    }, {
-      id: '333',
-      title: 'topic 2',
-      date: '2015-10-10',
-      description: 'blah blah balh topic 222222222222'
-    }]
-
-    function doIncrement () {
-      dispatch({type: 'INCREMENT_COUNTER'})
-    }
 
     return (
       <div>
@@ -47,7 +36,8 @@ class Home extends Component {
           className={sc['search-input']}
           fullWidth={true}
           floatingLabelText="Search" />
-        <TopicList list={topicList}/>
+        <RaisedButton label="Search" secondary={true} onClick={this.handleRefreshClick} />
+        <TopicList list={items || []}/>
       </div>
     )
   }
@@ -61,12 +51,28 @@ class Home extends Component {
     // unload module style
     this.style.unref()
   }
+
+  handleRefreshClick(e) {
+    e.preventDefault()
+    const { dispatch, topics, searchInput } = this.props;
+    dispatch(searchTopic(searchInput))
+    dispatch(fetchTopicsIfNeeded(searchInput))
+  }
 }
 
 function mapStateToProps(state) {
-  // console.log(state);
+  const { topics } = state
+  // console.log(state)
+  const {
+    isFetching,
+    lastUpdated,
+    items
+  } = topics
+
   return {
-    count: state.counter.count
+    items,
+    isFetching,
+    lastUpdated
   }
 }
 
