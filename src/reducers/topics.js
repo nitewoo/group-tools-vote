@@ -33,7 +33,7 @@ function receiveTopics(response) {
 
 function fetchTopics(input) {
   return function (dispatch) {
-    dispatch(requestTopics(input));
+    dispatch(requestTopics(input))
 
     return fetch('http://localhost:7070/api/getTopic')
       .then(response => response.json())

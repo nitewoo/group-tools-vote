@@ -12,7 +12,7 @@ var host = 'localhost';
 var port = parseInt(process.env.PORT) + 1 || 7071;
 
 module.exports = {
-  devtool: '#eval-source-map',
+  devtool: '#source-map',
   context: path.resolve(__dirname, '..'),
   entry: {
     main: [

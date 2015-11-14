@@ -34,7 +34,7 @@ class App extends Component {
     const { dispatch } = this.props;
 
     const menuItems = [
-      { route: '/', text: 'home' },
+      { route: '/', text: 'Vote' },
     ];
 
     const _toggleLeftNav = () => {
@@ -56,9 +56,7 @@ class App extends Component {
         <AppBar
           title="Vote"
           iconElementLeft={
-            <IconButton
-              onClick={_toggleLeftNav}
-            >
+            <IconButton onClick={_toggleLeftNav}>
               <NavigationMenu />
             </IconButton>
           }

@@ -27,7 +27,7 @@ import thunk from 'redux-thunk'
 // containers
 import {
   App,
-  Home
+  Topics
 } from './containers/index'
 
 // reducers
@@ -51,7 +51,7 @@ ReactDOM.render(
     <Provider store={store}>
       <ReduxRouter>
         <Route path="/" component={App}>
-          <IndexRoute component={Home}/>
+          <IndexRoute component={Topics}/>
         </Route>
       </ReduxRouter>
     </Provider>
